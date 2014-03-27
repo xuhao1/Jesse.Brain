@@ -1,0 +1,1180 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"se",
+				"setMotor"
+			],
+			[
+				"Pr",
+				"PrintStream"
+			],
+			[
+				"ca",
+				"catch"
+			],
+			[
+				"Me",
+				"MedullaInputThread"
+			],
+			[
+				"pr",
+				"println"
+			],
+			[
+				"Ma",
+				"MedullaInputThread"
+			],
+			[
+				"pa",
+				"path"
+			],
+			[
+				"shu",
+				"shutdownSignal"
+			],
+			[
+				"TA",
+				"TaskStack"
+			],
+			[
+				"ru",
+				"Running"
+			],
+			[
+				"tc",
+				"tclass"
+			],
+			[
+				"Pe",
+				"PendingTask"
+			],
+			[
+				"Task",
+				"TaskClass"
+			],
+			[
+				"Tas",
+				"TaskStatus"
+			],
+			[
+				"Ta",
+				"TaskClass"
+			],
+			[
+				"fl",
+				"flush"
+			],
+			[
+				"mo",
+				"motors"
+			],
+			[
+				"Sel",
+				"Serial"
+			],
+			[
+				"M",
+				"MOTOR0PIN"
+			],
+			[
+				"Se",
+				"SetupServo"
+			],
+			[
+				"S",
+				"setup"
+			],
+			[
+				"R",
+				"ReadUT"
+			],
+			[
+				"Ge",
+				"GetTemperature"
+			],
+			[
+				"RE",
+				"ReadUP"
+			],
+			[
+				"GE",
+				"GetPressure"
+			],
+			[
+				"read",
+				"read_p"
+			],
+			[
+				"w",
+				"write"
+			],
+			[
+				"h",
+				"h"
+			],
+			[
+				"HMC",
+				"HMC_ADRESS"
+			],
+			[
+				"mat",
+				"match_A"
+			],
+			[
+				"def",
+				"define"
+			],
+			[
+				"A",
+				"ADXL_ADRESS"
+			],
+			[
+				"a",
+				"a"
+			],
+			[
+				"Ad",
+				"Adxl_adress"
+			],
+			[
+				"begi",
+				"beginTransmission"
+			],
+			[
+				"Reg",
+				"Register_2D"
+			],
+			[
+				"b",
+				"byte"
+			],
+			[
+				"g",
+				"gyro"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "src/jesse/brain/JesseBrain.java",
+			"settings":
+			{
+				"buffer_size": 409,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/jesse/brain/Cerebellum.java",
+			"settings":
+			{
+				"buffer_size": 1206,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "/*\n * To change this license header, choose License Headers in Project Properties.\n * To change this template file, choose Tools | Templates\n * and open the template in the editor.\n */\n\npackage jesse.brain;\n\nimport gnu.io.*;\nimport java.io.*;\n/**\n *\n * @author xuhao\n */\nclass InputThread implements Runnable\n{\n    //TODO:分析输入数据\n    InputStream in;\n    InputThread (InputStream in)\n    {\n        this.in=in;\n    }\n    @Override\n    public void run()\n    {\n        try\n        {\n            while(true)\n            {\n                if(in.available()>0)\n                    System.out.print((char)in.read());\n            }\n        }\n        catch(Exception e)\n        {\n            //TODO Catch Exception\n            System.out.println(e);\n        }\n\n    }\n}\npublic class Medulla \n{\n    RXTXPort serial;\n    //TODO 制定通信协议，完成底层控制与通信代码\n    InputThread inpt;\n    PrintStream out;\n    void setMotor(int i,double v)\n    {\n        //TODO Finish setMotor:监测飞机状态\n        System.out.printf(\"$SET:MOTOR_%d:%f;\",i,v);\n    }\n    void shutdownMotors()\n    {\n        setMotor(0,0);\n        setMotor(1,0);\n        setMotor(2,0);\n        setMotor(3,0);\n    }\n    Medulla()\n    {\n        try{\n            serial=new RXTXPort(\"/dev/tty.usbserial\");\n            serial.setSerialPortParams( 115200,\n                SerialPort.DATABITS_8,\n                SerialPort.STOPBITS_1,\n                SerialPort.PARITY_NONE );\n            InputStream in = serial.getInputStream();\n            inpt=new InputThread(in);\n            new Thread(inpt).start();\n            out = new PrintStream(serial.getOutputStream());\n        }\n        catch(Exception e)\n        {\n            //TODO Catch Exception\n            System.out.println(e);\n        }\n    }    \n}\n",
+			"file": "src/jesse/brain/Medulla.java",
+			"file_size": 1788,
+			"file_write_time": 130402879510000000,
+			"settings":
+			{
+				"buffer_size": 1728,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "readme.md",
+			"settings":
+			{
+				"buffer_size": 261,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "doc/Cerebellum.md",
+			"settings":
+			{
+				"buffer_size": 1134,
+				"line_ending": "Unix",
+				"name": "#事件驱动的底层控制程序"
+			}
+		},
+		{
+			"file": "doc/Medulla.md",
+			"settings":
+			{
+				"buffer_size": 610,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/jesse/brain/Task.java",
+			"settings":
+			{
+				"buffer_size": 1234,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 167.0,
+		"selected_items":
+		[
+			[
+				"preview",
+				"Markdown Preview: Python Markdown: Preview in Browser"
+			],
+			[
+				"pre",
+				"Markdown Preview: Python Markdown: Preview in Browser"
+			],
+			[
+				"previvew",
+				"Markdown Preview: Python Markdown: Preview in Browser"
+			],
+			[
+				"dash",
+				"DashDoc: invoke Dash with selected word (flip syntax sensitivity)"
+			],
+			[
+				"das",
+				"DashDoc: invoke Dash with selected word"
+			],
+			[
+				"pci",
+				"Package Control: Install Package"
+			],
+			[
+				"ardu",
+				"Set Syntax: Arduino"
+			],
+			[
+				"c++",
+				"Set Syntax: C++"
+			],
+			[
+				"C++",
+				"Set Syntax: C++"
+			],
+			[
+				"wire",
+				"Package Control: Upgrade/Overwrite All Packages"
+			]
+		],
+		"width": 599.0
+	},
+	"console":
+	{
+		"height": 114.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404' + 'e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/xuhao/JesseDrone/Jesse.Brain/nbproject/project.properties",
+		"/Users/xuhao/Utilities/RXTX/build/Makefile",
+		"/Users/xuhao/JesseDrone/ArduCopter/perf_info.ino",
+		"/Users/xuhao/Develop/Application/InteraiveHeart/heart.py",
+		"/Users/xuhao/JesseDrone/Jesse.Brain/manifest.mf",
+		"/Users/xuhao/JesseDrone/Jesse.Brain/doc/Cerebellum.md",
+		"/Users/xuhao/JesseDrone/Jesse.Control/src/Control/motor.h",
+		"/Users/xuhao/JesseDrone/Jesse.Brain/readme.md",
+		"/Users/xuhao/JesseDrone/Jesse.Control/src/Control/montior.ino",
+		"/Users/xuhao/JesseDrone/Jesse.Control/src/Control/Setup.ino",
+		"/Users/xuhao/JesseDrone/Jesse.Control/src/Control/Control.ino",
+		"/Users/xuhao/JesseDrone/Jesse.Control/src/Control/montior.h",
+		"/Users/xuhao/JesseDrone/Jesse.Control/src/Control/Setup.h",
+		"/Users/xuhao/JesseDrone/Jesse.Control/src/Control/test.h",
+		"/Users/xuhao/JesseDrone/Jesse.Control/src/adxl/adxl.h",
+		"/Users/xuhao/JesseDrone/Jesse.Control/src/adxl/adxl.ino",
+		"/Users/xuhao/JesseDrone/Jesse.Control/src/Control/test.ino",
+		"/Users/xuhao/JesseDrone/Jesse.Control/src/Control/motor.ino",
+		"/Users/xuhao/JesseDrone/Jesse.Control/src/Control/config.h",
+		"/Users/xuhao/JesseDrone/Jesse.Control/src/gyro/gyro.ino",
+		"/Users/xuhao/JesseDrone/Jesse.Control/src/gyro/gyro.h",
+		"/Users/xuhao/JesseDrone/Jesse.Control/src/test.h",
+		"/Users/xuhao/JesseDrone/Jesse.Control/src/Jesse.Control.ino",
+		"/Users/xuhao/JesseDrone/Jesse.Control/src/Setup.h",
+		"/Users/xuhao/JesseDrone/Jesse.Control/src/Setup.ino",
+		"/Users/xuhao/JesseDrone/Jesse.Control/src/readme.md",
+		"/Users/xuhao/JesseDrone/Jesse.Control/src/hmc/hmc.ino",
+		"/Users/xuhao/JesseDrone/Jesse.Control/src/hmc/hmc.h",
+		"/Users/xuhao/JesseDrone/Jesse.Control/src/bmp/bmp.h",
+		"/home/zyz/Jesse.Control/src/bmp/bmp.ino",
+		"/home/zyz/Jesse.Control/src/bmp/bmp.h",
+		"/home/zyz/Jesse.Control/src/untitled",
+		"/home/zyz/Jesse.Control/src/gyro.h",
+		"/home/zyz/Jesse.Control/src/gyro.ino"
+	],
+	"find":
+	{
+		"height": 0.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"jLabel1"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 2,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "src/jesse/brain/JesseBrain.java",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 409,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								390,
+								390
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Java/Java.tmLanguage",
+							"vintage":
+							{
+								"_vintageous_glue_until_normal_mode": false,
+								"_vintageous_gluing_sequence": false,
+								"_vintageous_input_parsers":
+								[
+								],
+								"_vintageous_non_interactive": false,
+								"action": null,
+								"action_count": "",
+								"capture_register": false,
+								"mode": "mode_normal",
+								"motion": null,
+								"motion_count": "",
+								"normal_insert_count": "1",
+								"partial_sequence": "",
+								"register": "\"",
+								"repeat_data":
+								[
+									"native",
+									[
+										"sequence",
+										{
+											"commands":
+											[
+												[
+													"insert",
+													{
+														"characters": ".shutDow"
+													}
+												],
+												[
+													"insert",
+													{
+														"characters": "n"
+													}
+												],
+												[
+													"left_delete",
+													null
+												],
+												[
+													"left_delete",
+													null
+												],
+												[
+													"left_delete",
+													null
+												],
+												[
+													"left_delete",
+													null
+												],
+												[
+													"insert",
+													{
+														"characters": "downMo"
+													}
+												],
+												[
+													"insert",
+													{
+														"characters": "tor"
+													}
+												],
+												[
+													"insert_snippet",
+													{
+														"contents": "($0)"
+													}
+												],
+												[
+													"move",
+													{
+														"by": "characters",
+														"forward": true
+													}
+												],
+												[
+													"insert",
+													{
+														"characters": ";"
+													}
+												],
+												[
+													"move",
+													{
+														"by": "characters",
+														"forward": false
+													}
+												],
+												[
+													"move",
+													{
+														"by": "characters",
+														"forward": false
+													}
+												],
+												[
+													"move",
+													{
+														"by": "characters",
+														"forward": false
+													}
+												],
+												[
+													"insert",
+													{
+														"characters": "s"
+													}
+												],
+												[
+													"move",
+													{
+														"by": "characters",
+														"forward": true
+													}
+												],
+												[
+													"move",
+													{
+														"by": "characters",
+														"forward": true
+													}
+												],
+												[
+													"move",
+													{
+														"by": "characters",
+														"forward": true
+													}
+												],
+												[
+													"left_delete",
+													null
+												]
+											]
+										}
+									],
+									"mode_insert",
+									null
+								],
+								"sequence": "",
+								"user_input": "",
+								"xpos": 34
+							}
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "src/jesse/brain/Cerebellum.java",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1206,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								7,
+								7
+							]
+						],
+						"settings":
+						{
+							"highlight_line": false,
+							"syntax": "Packages/Java/Java.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true,
+							"vintage":
+							{
+								"_vintageous_glue_until_normal_mode": false,
+								"_vintageous_gluing_sequence": false,
+								"_vintageous_input_parsers":
+								[
+								],
+								"_vintageous_non_interactive": false,
+								"action": null,
+								"action_count": "",
+								"capture_register": false,
+								"mode": "mode_normal",
+								"motion": null,
+								"motion_count": "",
+								"normal_insert_count": "1",
+								"partial_sequence": "",
+								"register": "\"",
+								"repeat_data":
+								[
+									"native",
+									[
+										"_enter_normal_mode",
+										{
+											"mode": "mode_insert"
+										}
+									],
+									"mode_insert",
+									null
+								],
+								"sequence": "",
+								"user_input": "",
+								"xpos": 7
+							}
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "src/jesse/brain/Medulla.java",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1728,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								413,
+								413
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Java/Java.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true,
+							"vintage":
+							{
+								"_vintageous_glue_until_normal_mode": false,
+								"_vintageous_input_parsers":
+								[
+								],
+								"action": null,
+								"action_count": "",
+								"capture_register": false,
+								"mode": "mode_normal",
+								"motion": null,
+								"motion_count": "",
+								"normal_insert_count": "1",
+								"partial_sequence": "",
+								"register": "\"",
+								"repeat_data":
+								[
+									"native",
+									[
+										"sequence",
+										{
+											"commands":
+											[
+												[
+													"left_delete",
+													null
+												],
+												[
+													"insert",
+													{
+														"characters": ":"
+													}
+												]
+											]
+										}
+									],
+									null,
+									null
+								],
+								"sequence": "",
+								"user_input": "",
+								"xpos": 0
+							}
+						},
+						"translation.x": 0.0,
+						"translation.y": 72.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 3,
+					"file": "readme.md",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 261,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Markdown/Markdown.tmLanguage",
+							"vintage":
+							{
+								"_vintageous_input_parsers":
+								[
+								],
+								"action": null,
+								"action_count": "",
+								"capture_register": false,
+								"mode": "mode_normal",
+								"motion": null,
+								"motion_count": "",
+								"partial_sequence": "",
+								"register": "\"",
+								"sequence": "",
+								"user_input": "",
+								"xpos": 0
+							}
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "doc/Cerebellum.md",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1134,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								168,
+								168
+							]
+						],
+						"settings":
+						{
+							"auto_name": "#事件驱动的底层控制程序",
+							"history_list_is_closing": true,
+							"parser": "markdown",
+							"syntax": "Packages/Markdown/Markdown.tmLanguage",
+							"tab_size": 4,
+							"target": "disk",
+							"translate_tabs_to_spaces": true,
+							"vintage":
+							{
+								"_vintageous_glue_until_normal_mode": false,
+								"_vintageous_input_parsers":
+								[
+								],
+								"action": null,
+								"action_count": "",
+								"capture_register": false,
+								"mode": "mode_normal",
+								"motion": null,
+								"motion_count": "",
+								"normal_insert_count": "1",
+								"partial_sequence": "",
+								"register": "\"",
+								"repeat_data":
+								[
+									"native",
+									[
+										"sequence",
+										{
+											"commands":
+											[
+												[
+													"_vi_big_i",
+													{
+														"count": 1,
+														"mode": "mode_internal_normal"
+													}
+												],
+												[
+													"left_delete",
+													null
+												]
+											]
+										}
+									],
+									"mode_insert",
+									null
+								],
+								"sequence": "",
+								"user_input": "",
+								"xpos": 0
+							}
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "doc/Medulla.md",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 610,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								134,
+								134
+							]
+						],
+						"settings":
+						{
+							"parser": "markdown",
+							"syntax": "Packages/Markdown/Markdown.tmLanguage",
+							"tab_size": 4,
+							"target": "disk",
+							"translate_tabs_to_spaces": true,
+							"vintage":
+							{
+								"_vintageous_glue_until_normal_mode": false,
+								"_vintageous_input_parsers":
+								[
+								],
+								"action": null,
+								"action_count": "",
+								"capture_register": false,
+								"mode": "mode_normal",
+								"motion": null,
+								"motion_count": "",
+								"normal_insert_count": "1",
+								"partial_sequence": "",
+								"register": "\"",
+								"repeat_data":
+								[
+									"native",
+									[
+										"sequence",
+										{
+											"commands":
+											[
+												[
+													"insert",
+													{
+														"characters": "MEd"
+													}
+												],
+												[
+													"left_delete",
+													null
+												],
+												[
+													"left_delete",
+													null
+												],
+												[
+													"insert",
+													{
+														"characters": "edua"
+													}
+												],
+												[
+													"left_delete",
+													null
+												],
+												[
+													"insert",
+													{
+														"characters": "lla"
+													}
+												],
+												[
+													"insert",
+													{
+														"characters": "为底层"
+													}
+												],
+												[
+													"insert",
+													{
+														"characters": "模块，"
+													}
+												],
+												[
+													"insert",
+													{
+														"characters": "主要"
+													}
+												],
+												[
+													"insert",
+													{
+														"characters": "负责"
+													}
+												],
+												[
+													"insert",
+													{
+														"characters": "驱动，"
+													}
+												],
+												[
+													"insert",
+													{
+														"characters": "位置"
+													}
+												],
+												[
+													"insert",
+													{
+														"characters": "修正，"
+													}
+												],
+												[
+													"insert",
+													{
+														"characters": "获得"
+													}
+												],
+												[
+													"insert",
+													{
+														"characters": "GPS"
+													}
+												],
+												[
+													"insert",
+													{
+														"characters": "数据"
+													}
+												],
+												[
+													"insert",
+													{
+														"characters": "等。"
+													}
+												]
+											]
+										}
+									],
+									"mode_insert",
+									null
+								],
+								"sequence": "",
+								"user_input": "",
+								"xpos": 0
+							}
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "src/jesse/brain/Task.java",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1234,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								684,
+								684
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Java/Java.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true,
+							"vintage":
+							{
+								"_vintageous_glue_until_normal_mode": false,
+								"_vintageous_gluing_sequence": false,
+								"_vintageous_input_parsers":
+								[
+								],
+								"_vintageous_non_interactive": false,
+								"action": null,
+								"action_count": "",
+								"capture_register": false,
+								"mode": "mode_normal",
+								"motion": null,
+								"motion_count": "",
+								"normal_insert_count": "1",
+								"partial_sequence": "",
+								"register": "\"",
+								"repeat_data":
+								[
+									"native",
+									[
+										"sequence",
+										{
+											"commands":
+											[
+												[
+													"_vi_o",
+													{
+														"count": 1,
+														"mode": "mode_internal_normal"
+													}
+												],
+												[
+													"insert",
+													{
+														"characters": "this.body"
+													}
+												],
+												[
+													"insert",
+													{
+														"characters": "=body;"
+													}
+												]
+											]
+										}
+									],
+									"mode_insert",
+									null
+								],
+								"sequence": "",
+								"user_input": "",
+								"xpos": 3
+							}
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 34.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			0.47314523788,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.unsaved_changes":
+	{
+		"height": 118.0
+	},
+	"project": "Jesse.Brain.sublime-project",
+	"replace":
+	{
+		"height": 0.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"me",
+				"src/jesse/brain/Medulla.java"
+			],
+			[
+				"ce",
+				"src/jesse/brain/Cerebellum.java"
+			],
+			[
+				"tes",
+				"src/Control/Setup.h"
+			],
+			[
+				"mo",
+				"src/Control/montior.ino"
+			],
+			[
+				"motor",
+				"src/Control/motor.ino"
+			],
+			[
+				"se",
+				"src/Control/Setup.h"
+			],
+			[
+				"test",
+				"src/Control/test.h"
+			],
+			[
+				"",
+				"~/Jesse.Control/src/gyro.ino"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+			[
+				"",
+				"~/JesseDrone/ArduCopter/ardu.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"settings":
+	{
+		"_vintageous_reset_during_init": true,
+		"vintage":
+		{
+			"_cmdline_cd": "/Users/xuhao/JesseDrone/Jesse.Brain/src/jesse/brain"
+		}
+	},
+	"show_minimap": false,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": false,
+	"side_bar_width": 150.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
