@@ -5,67 +5,67 @@ Medulla为底层模块，主要负责驱动，位置修正，获得GPS数据等�
 
 开机自检:
 
-    $HELLO,WORLD;
+    $HELLO,WORLD;\n
 
 设置电机i的大小为f,i从0-3，f为0-1
 
-    $SET:MOTOR_i:%f
+    $SET:MOTOR_i:%f;\n
 
 修正坐标:
 
-    $SETVAL:POSI:(%f,%f,%f);
+    $SETVAL:POSI:(%f,%f,%f);\n
 
 速度修正:
 
-    $SETVAL:VELO:(%f,%f,%f);
+    $SETVAL:VELO:(%f,%f,%f);\n
 
 设置舵机:
 
-    $SETVAL:SERV:%f;
+    $SETVAL:SERV:%f;\n
 
 ##Device2Host
 
 完成自检:
 
-    $HELLO,WORLD;
+    $HELLO,WORLD;\n
 
 ###直接测量量    
 
 气压计
 
-    $VAL:BARO:%f;
+    $VAL:BARO:%f;\n
 
 温度
 
-    $VAL:TEMP:%f;
+    $VAL:TEMP:%f;\n
     
 加速度
 
-    $VAL:ACCE:(%f,%f,%f);
+    $VAL:ACCE:(%f,%f,%f);\n
 
 旋转
 
-    $VAL:ROTA:(%f,%f,%f);
+    $VAL:ROTA:(%f,%f,%f);\n
 
 磁场
 
-    $VAL:MAGN:(%f,%f,%f);
+    $VAL:MAGN:(%f,%f,%f);\n
 
 超声波
     
-    $VAL:SUPE:%d,%f;
+    $VAL:SUPE:%d,%f;\n
 
 ###积分量
 
 角度
 
-    $VAL:ANGL:((%f,%f),(%f,%f),(%f,%f));
+    $VAL:ANGL:((%f,%f),(%f,%f),(%f,%f));\n
 速度
 
-    $VAL:VELO:((%f,%f),(%f,%f),(%f,%f));
+    $VAL:VELO:((%f,%f),(%f,%f),(%f,%f));\n
 位置
 
-    $VAL:POSI:((%f,%f),(%f,%f),(%f,%f));
+    $VAL:POSI:((%f,%f),(%f,%f),(%f,%f));\n
 
 ##电机分配算法
 
